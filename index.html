@@ -1,192 +1,61 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Math Assistant — Rumus & Latihan (Kelas 10 Sem 1)</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Assistant — Kelas 10 SMA</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-  <div class="wrap">
+
+<div class="wrap">
+
     <header>
-      <h1>Math Assistant</h1>
-      <div class="small-muted">
-        Rumus, latihan (step-by-step), dan tips cepat — Kelas 10 SMA Semester 1 (Kurikulum Merdeka)
-      </div>
+        <h1>Math Assistant</h1>
+        <p class="sub">Rumus • Latihan • Tips Cepat — Kelas 10 SMA Semester 1</p>
     </header>
 
-    <!-- NAV TILES -->
-    <div class="tiles">
-      <button class="tile" data-target="rumusPage"><div class="icon">📘</div><div class="label">Belajar Rumus</div></button>
-      <button class="tile" data-target="latihanPage"><div class="icon">📝</div><div class="label">Latihan Soal</div></button>
-      <button class="tile" data-target="tipsPage"><div class="icon">⚡</div><div class="label">Tips Cepat</div></button>
-      <button class="tile" data-target="explainPage"><div class="icon">🔎</div><div class="label">Penjelasan (QR)</div></button>
-      <button class="tile" data-target="aboutPage"><div class="icon">ℹ️</div><div class="label">Tentang</div></button>
-      <button class="tile" data-target="contactPage"><div class="icon">📤</div><div class="label">Kirim Saran</div></button>
-    </div>
+    <!-- HOME TILES -->
+    <section id="homePage" class="page active">
+        <div class="tiles">
+            <button class="tile" data-target="rumusPage">📘<br>Rumus</button>
+            <button class="tile" data-target="latihanPage">📝<br>Latihan</button>
+            <button class="tile" data-target="tipsPage">⚡<br>Tips Cepat</button>
+            <button class="tile" data-target="aboutPage">ℹ️<br>Tentang</button>
+        </div>
+    </section>
 
     <!-- RUMUS PAGE -->
-    <section id="rumusPage" class="page active">
-      <div class="card">
-        <div class="section-title">Rumus — Kelas 10 SMA Semester 1 (Kurikulum Merdeka)</div>
-        <ul class="rumus-list">
-
-          <li>
-            <div class="rumus-title">Eksponen — Aturan Umum</div>
-            <pre class="code">
-a^m × a^n = a^(m+n)
-a^m ÷ a^n = a^(m−n)   (a ≠ 0)
-(a^m)^n = a^(m×n)
-(ab)^n = a^n b^n
-a^(−n) = 1 / a^n
-a^(m/n) = ⁿ√(a^m) = (ⁿ√a)^m
-            </pre>
-          </li>
-
-          <li>
-            <div class="rumus-title">Logaritma</div>
-            <pre class="code">
-log_a b = c   ⇔   a^c = b
-log_a(xy) = log_a x + log_a y
-log_a(x/y) = log_a x − log_a y
-log_a(x^k) = k · log_a x
-change of base: log_a b = log_c b / log_c a
-            </pre>
-          </li>
-
-          <li>
-            <div class="rumus-title">Persamaan Linear & Fungsi Linear</div>
-            <pre class="code">
-Persamaan garis:  y = m x + c
-Gradien m = (y2 − y1) / (x2 − x1)
-Titik potong sumbu-y = c
-            </pre>
-          </li>
-
-          <li>
-            <div class="rumus-title">Sistem Persamaan Linear (2 variabel)</div>
-            <pre class="code">
-Metode: substitusi, eliminasi (grafik)
-Contoh Cramer (2×2) jika perlu:
-| a b | |x| = |e|
-| c d | |y|   |f|
-det = a d − b c
-            </pre>
-          </li>
-
-          <li>
-            <div class="rumus-title">Fungsi Kuadrat</div>
-            <pre class="code">
-y = a x^2 + b x + c
-Diskriminan: D = b^2 − 4 a c
-Jika D > 0 → 2 akar real; D = 0 → 1 akar; D < 0 → tidak ada akar real
-Titik puncak (vertex): x_v = −b / (2a)
-            </pre>
-          </li>
-
-          <li>
-            <div class="rumus-title">Trigonometri Dasar (segitiga siku)</div>
-            <pre class="code">
-sin θ = opposite / hypotenuse
-cos θ = adjacent / hypotenuse
-tan θ = opposite / adjacent = sin θ / cos θ
-Identitas: sin^2 θ + cos^2 θ = 1
-            </pre>
-          </li>
-
-          <li>
-            <div class="rumus-title">Bangun Datar (Ringkasan)</div>
-            <pre class="code">
-Persegi: Keliling = 4 s ; Luas = s^2
-Persegi panjang: Luas = p × l ; Keliling = 2(p + l)
-Segitiga: Luas = 1/2 × alas × tinggi
-Lingkaran: Luas = π r^2 ; Keliling = 2 π r
-            </pre>
-          </li>
-
-          <li>
-            <div class="rumus-title">Statistika & Peluang</div>
-            <pre class="code">
-Rata-rata (Mean) = Σx / n
-Median = nilai tengah setelah diurut
-Modus = nilai yang sering muncul (frekuensi tertinggi)
-Peluang (sederhana) = favorable outcomes / total outcomes
-            </pre>
-          </li>
-
-        </ul>
-      </div>
+    <section id="rumusPage" class="page">
+        <h2 class="title">Rumus — Kelas 10 Semester 1</h2>
+        <div id="rumusContainer"></div>
+        <button class="back" data-target="homePage">Kembali</button>
     </section>
 
     <!-- LATIHAN PAGE -->
     <section id="latihanPage" class="page">
-      <div class="card">
-        <div class="section-title">Latihan Soal — (Kelas 10 Sem 1)</div>
-        <ul id="latihanList" class="list"></ul>
-      </div>
+        <h2 class="title">Latihan Soal (Step-by-Step)</h2>
+        <ul id="latihanList"></ul>
+        <button class="back" data-target="homePage">Kembali</button>
     </section>
 
-    <!-- TIPS -->
+    <!-- TIPS PAGE -->
     <section id="tipsPage" class="page">
-      <div class="card">
-        <div class="section-title">Tips Cepat — Aturan & Contoh (Kelas 10 Sem 1)</div>
-        <div id="tipsList"></div>
-      </div>
+        <h2 class="title">Tips Cepat — Kelas 10</h2>
+        <div id="tipsContainer"></div>
+        <button class="back" data-target="homePage">Kembali</button>
     </section>
 
-    <!-- EXPLAIN via QR -->
-    <section id="explainPage" class="page">
-      <div class="card">
-        <div class="section-title">Penjelasan Singkat (dapat dibuka via QR)</div>
-
-        <div class="qr-wrap">
-          <div>
-            <div class="small-muted">Pindai QR — membuka bagian ini</div>
-            <img id="qrImage" alt="QR code" />
-          </div>
-
-          <div style="flex:1">
-            <p>Kamu memindai QR yang mengarah ke halaman ini. Berikut ringkasan:</p>
-            <ul>
-              <li><strong>Eksponen:</strong> 2^3 × 2^2 = 2^5 = 32</li>
-              <li><strong>Logaritma:</strong> log_2 8 = 3</li>
-            </ul>
-          </div>
-        </div>
-
-        <button class="btn ghost" data-target="rumusPage">Kembali ke Rumus</button>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
+    <!-- ABOUT PAGE -->
     <section id="aboutPage" class="page">
-      <div class="card">
-        <h3>Tentang</h3>
-        <p>Halaman ini berisi kumpulan rumus, latihan langkah demi langkah, dan tips sesuai Kurikulum Merdeka.</p>
-        <button class="btn ghost" data-target="home">Kembali</button>
-      </div>
+        <h2 class="title">Tentang Aplikasi</h2>
+        <p>Aplikasi ini membantu siswa mempelajari rumus, latihan, dan tips cepat
+           berdasarkan materi Kelas 10 SMA Semester 1 Kurikulum Merdeka.</p>
+        <button class="back" data-target="homePage">Kembali</button>
     </section>
 
-    <!-- CONTACT -->
-    <section id="contactPage" class="page">
-      <div class="card">
-        <h3>Kirim Saran</h3>
-        <textarea id="contactInput" placeholder="Masukkan saran..."></textarea>
+</div>
 
-        <div class="controls">
-          <button class="btn primary" id="sendContact">Kirim</button>
-          <button class="btn ghost" data-target="home">Kembali</button>
-          <div id="contactStatus" class="small-muted"></div>
-        </div>
-      </div>
-    </section>
-
-    <footer class="footer">
-      <small>Warna tema: Biru Gelap • Materi Kelas 10 Sem 1</small>
-    </footer>
-  </div>
-
-  <script src="app.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

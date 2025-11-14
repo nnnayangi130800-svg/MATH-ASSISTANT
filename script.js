@@ -1,114 +1,126 @@
-// --- Navigation
-document.querySelectorAll('.tile, button[data-target]').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      const target = btn.dataset.target;
-      if(target) openPage(target);
+// PAGE SWITCHER
+document.querySelectorAll("[data-target]").forEach(btn => {
+    btn.addEventListener("click", () => {
+        const target = btn.dataset.target;
+        document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+        document.getElementById(target).classList.add("active");
+        window.scrollTo(0, 0);
     });
-  });
-  
-  function openPage(id){
-    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-    const page = document.getElementById(id);
-    if(page) page.classList.add('active');
-    window.scrollTo({top:0,behavior:'smooth'});
-  }
-  
-  // --- Latihan Soal
-  const latihanData = [
+});
+
+/* ============================
+   1. RUMUS — Kelas 10 Sem 1
+============================= */
+
+const rumus = [
     {
-      q:'Volume kubus dengan rusuk 12?',
-      a:`Langkah 1: Rumus V = s^3
-  Langkah 2: V = 12^3
-  Langkah 3: 1728
-  Jadi, V = 1728 satuan³`
+        title: "Eksponen",
+        body: `a^m × a^n = a^(m+n)
+a^m ÷ a^n = a^(m−n)
+(a^m)^n = a^(m×n)
+(ab)^n = a^n b^n
+a^(−n) = 1 / a^n`
     },
     {
-      q:'Keliling persegi sisi 5 cm?',
-      a:`K = 4 × 5 = 20 cm`
+        title: "Logaritma",
+        body: `log_a b = c  ⇔  a^c = b
+log(xy) = log x + log y
+log(x/y) = log x − log y
+log(x^k) = k log x`
     },
     {
-      q:'Luas segitiga alas 10, tinggi 12?',
-      a:`L = 1/2 × 10 × 12 = 60 cm²`
+        title: "Persamaan Linear",
+        body: `y = mx + c
+m = (y2 − y1)/(x2 − x1)`
     },
     {
-      q:'SPL: 2x+3y=13 & x−y=1',
-      a:`x = 16/5, y = 11/5`
+        title: "Fungsi Kuadrat",
+        body: `y = ax² + bx + c
+Diskriminan: D = b² − 4ac`
     },
     {
-      q:'Hitung 2^3 × 2^(−1) × (2^2)^3',
-      a:`Hasil = 256`
+        title: "Trigonometri Dasar",
+        body: `sin = depan / miring
+cos = samping / miring
+tan = depan / samping`
     },
     {
-      q:'Jumlah akar y = x²−4x+3',
-      a:`D = 4 → 2 akar real (1 dan 3)`
+        title: "Bangun Datar",
+        body: `Persegi: L = s²
+Persegi Panjang: L = p×l
+Lingkaran: L = πr²`
+    },
+];
+
+const rumusContainer = document.getElementById("rumusContainer");
+
+rumus.forEach(r => {
+    const div = document.createElement("div");
+    div.className = "block";
+    div.innerHTML = `<strong>${r.title}</strong><pre>${r.body}</pre>`;
+    rumusContainer.appendChild(div);
+});
+
+
+/* ============================
+   2. LATIHAN SOAL
+============================= */
+
+const latihan = [
+    {
+        q: "Hitung 2^3 × 2^4",
+        a: `Langkah 1: Basis sama → tambahkan pangkat
+Langkah 2: 3 + 4 = 7
+Langkah 3: 2^7 = 128`
     },
     {
-      q:'Peluang dadu keluar 3?',
-      a:`1/6`
-    }
-  ];
-  
-  const latihanList = document.getElementById('latihanList');
-  latihanData.forEach((item, i)=>{
-    const li = document.createElement('li');
+        q: "Selesaikan: log₂ 8",
+        a: `Langkah 1: log₂ 8 = c → 2^c = 8
+Langkah 2: 2^3 = 8
+Jadi c = 3`
+    },
+    {
+        q: "Gradien garis melalui (2,5) dan (6,13)",
+        a: `m = (13−5) / (6−2)
+m = 8/4 = 2`
+    },
+];
+
+const latihanList = document.getElementById("latihanList");
+
+latihan.forEach((item, i) => {
+    const li = document.createElement("li");
     li.innerHTML = `
-      <strong>${escapeHtml(item.q)}</strong>
-      <div><button class="btn ghost" onclick="toggleAns(${i})">Tampilkan Jawaban</button></div>
-      <div id="ans-${i}" class="ans">${escapeHtml(item.a)}</div>
-    `;
+        <strong>${item.q}</strong>
+        <button class="back" style="background:#457B9D;margin-top:10px"
+                onclick="toggleAns(${i})">Lihat Langkah</button>
+        <div id="ans-${i}" class="ans">${item.a}</div>`;
     latihanList.appendChild(li);
-  });
-  
-  function toggleAns(i){
-    const el = document.getElementById('ans-'+i);
-    el.style.display = (el.style.display==='block'?'none':'block');
-  }
-  window.toggleAns = toggleAns;
-  
-  // --- Tips Cepat
-  const tips = [
-    {rule:'Eksponen — Perkalian', example:'a^m × a^n = a^(m+n)'},
-    {rule:'Eksponen — Pembagian', example:'a^m ÷ a^n = a^(m−n)'},
-    {rule:'Eksponen — Pangkat', example:'(a^m)^n = a^(mn)'},
-    {rule:'Logaritma — Perkalian', example:'log(xy)=log x + log y'},
-    {rule:'Fungsi Kuadrat — D', example:'D>0: 2 akar; D=0: 1 akar; D<0: tidak real'},
-    {rule:'Trigonometri Dasar', example:'tan = sin / cos'},
-    {rule:'Peluang', example:'P = kejadian ÷ total'}
-  ];
-  
-  const tipsList = document.getElementById('tipsList');
-  tips.forEach(t=>{
-    const d = document.createElement('div');
-    d.className = 'tip';
-    d.innerHTML = `<strong>${escapeHtml(t.rule)}</strong><div>${escapeHtml(t.example)}</div>`;
-    tipsList.appendChild(d);
-  });
-  
-  // --- QR
-  const qrImg = document.getElementById('qrImage');
-  (function makeQR(){
-    const url = window.location.href.split('#')[0] + '#explain';
-    qrImg.src = 'https://chart.googleapis.com/chart?cht=qr&chs=220x220&chl=' + encodeURIComponent(url);
-  })();
-  
-  // --- Saran (LocalStorage)
-  document.getElementById('sendContact').addEventListener('click', ()=>{
-    const txt = document.getElementById('contactInput').value.trim();
-    const st = document.getElementById('contactStatus');
-    if(!txt){ st.textContent='Isi dulu.'; return; }
-    const key='math_assistant_contacts';
-    const arr = JSON.parse(localStorage.getItem(key)||'[]');
-    arr.push({text:txt,ts:Date.now()});
-    localStorage.setItem(key, JSON.stringify(arr));
-    st.textContent='Tersimpan!';
-    document.getElementById('contactInput').value='';
-  });
-  
-  // --- Helper
-  function escapeHtml(s){
-    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  }
-  
-  // Auto-open QR section if URL memakai #explain
-  if(window.location.hash==='#explain') openPage('explainPage');
-  
+});
+
+function toggleAns(i) {
+    const el = document.getElementById("ans-" + i);
+    el.style.display = el.style.display === "block" ? "none" : "block";
+}
+window.toggleAns = toggleAns;
+
+
+/* ============================
+   3. TIPS CEPAT
+============================= */
+
+const tips = [
+    {rule: "Eksponen", txt: "Basis sama → pangkat ditambah. Contoh: 2³ × 2⁴ = 2⁷"},
+    {rule: "Logaritma", txt: "log(xy) = log x + log y (memecah perkalian)"},
+    {rule: "Kuadrat", txt: "D = b² − 4ac menentukan jumlah akar"},
+    {rule: "Trigonometri", txt: "tan = sin ÷ cos"}
+];
+
+const tipsContainer = document.getElementById("tipsContainer");
+
+tips.forEach(t => {
+    const div = document.createElement("div");
+    div.className = "tip";
+    div.innerHTML = `<strong>${t.rule}</strong><br>${t.txt}`;
+    tipsContainer.appendChild(div);
+});
