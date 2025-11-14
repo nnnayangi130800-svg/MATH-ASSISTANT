@@ -1,23 +1,125 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math Assistant</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Math Assistant</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <h1>Math Assistant</h1>
+    </header>
 
-    <h1>Math Assistant</h1>
+    <!-- Home (Tiles) -->
+    <section id="home" class="page active">
+      <div class="tiles">
+        <button class="tile tile-1" data-target="tanya">
+          <div class="icon">💬</div>
+          <div class="label">Tanya AI</div>
+        </button>
+        <button class="tile tile-2" data-target="rumus">
+          <div class="icon">📘</div>
+          <div class="label">Belajar Rumus</div>
+        </button>
+        <button class="tile tile-3" data-target="latihan">
+          <div class="icon">📝</div>
+          <div class="label">Latihan Soal</div>
+        </button>
+        <button class="tile tile-4" data-target="tips">
+          <div class="icon">⚡</div>
+          <div class="label">Tips Cepat</div>
+        </button>
+        <button class="tile tile-5" data-target="about">
+          <div class="icon">ℹ️</div>
+          <div class="label">Tentang</div>
+        </button>
+        <button class="tile tile-6" data-target="contact">
+          <div class="icon">📤</div>
+          <div class="label">Kirim Saran</div>
+        </button>
+      </div>
+    </section>
 
-    <textarea id="userInput" placeholder="Tanyakan soal matematika di sini..."></textarea>
+    <!-- Tanya AI Page -->
+    <section id="tanya" class="page">
+      <div class="card">
+        <label class="lbl">Tulis pertanyaan matematika kamu di sini…</label>
+        <textarea id="questionInput" placeholder="Contoh: Rumus luas segitiga atau hitung keliling lingkaran r=7"></textarea>
+        <div class="controls">
+          <button id="sendBtn" class="btn primary">Kirim Pertanyaan</button>
+          <button id="copyBtn" class="btn secondary">Salin Jawaban</button>
+          <button id="backFromTanya" class="btn ghost">Kembali</button>
+          <div id="status" class="status"></div>
+        </div>
+        <div id="answerBox" class="answerBox"></div>
+      </div>
 
-    <button id="sendBtn">Kirim</button>
-    <button id="copyBtn">Salin Jawaban</button>
-    <button id="speakBtn">Dengarkan 🔊</button>
+      <div class="card">
+        <label class="lbl">Riwayat Pertanyaan</label>
+        <div id="historyList" class="historyList"></div>
+      </div>
+    </section>
 
-    <div id="responseBox"></div>
+    <!-- Belajar Rumus Page -->
+    <section id="rumus" class="page">
+      <div class="card">
+        <label class="lbl">Rumus</label>
+        <ul id="rumusList" class="list"></ul>
+      </div>
+      <div class="card">
+        <button id="backFromRumus" class="btn ghost">Kembali</button>
+      </div>
+    </section>
 
-    <script src="script.js"></script>
+    <!-- Latihan Soal Page -->
+    <section id="latihan" class="page">
+      <div class="card">
+        <label class="lbl">Latihan Soal</label>
+        <ul id="latihanList" class="list"></ul>
+      </div>
+      <div class="card">
+        <button id="backFromLatihan" class="btn ghost">Kembali</button>
+      </div>
+    </section>
+
+    <!-- Tips Cepat Page -->
+    <section id="tips" class="page">
+      <div class="card tipsGrid" id="tipsGrid"></div>
+      <div class="card">
+        <button id="backFromTips" class="btn ghost">Kembali</button>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="page">
+      <div class="card">
+        <h3>Tentang Math Assistant</h3>
+        <p>Aplikasi ringan untuk menjawab pertanyaan matematika. Gratis, sederhana, dan cocok untuk siswa & guru.</p>
+        <button id="backFromAbout" class="btn ghost">Kembali</button>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="page">
+      <div class="card">
+        <label class="lbl">Kirim Saran</label>
+        <textarea id="contactInput" placeholder="Masukkan saran atau masukan..."></textarea>
+        <div class="controls">
+          <button id="sendContact" class="btn primary">Kirim</button>
+          <button id="backFromContact" class="btn ghost">Kembali</button>
+          <div id="contactStatus" class="status"></div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <small>Warna tema: Biru gelap (#1B3C73) • Dibuat untuk deploy ke Vercel</small>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
