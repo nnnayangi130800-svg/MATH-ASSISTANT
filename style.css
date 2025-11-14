@@ -1,7 +1,7 @@
 :root{
-    --bg: #ffffff;
-    --primary: #1B3C73;   /* biru gelap */
-    --tile: #457B9D;      /* biru terang */
+    --bg: #f2f5f8;
+    --primary: #1B3C73;
+    --tile: #457B9D;
     --green: #3A7D44;
     --orange: #F4A261;
     --yellow: #FFCA3A;
@@ -13,7 +13,7 @@
   body{
     margin:0;
     font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
-    background:#f2f5f8;
+    background:var(--bg);
     color:#0f172a;
   }
   .container{max-width:940px;margin:16px auto;padding:18px}
@@ -66,7 +66,7 @@
   
   .status{margin-left:auto;color:var(--muted);font-size:14px}
   
-  .answerBox{margin-top:12px;background:#fbfdff;border-radius:8px;padding:12px;min-height:80px;border:1px dashed #e6edf3}
+  .answerBox{margin-top:12px;background:#fbfdff;border-radius:8px;padding:12px;min-height:80px;border:1px dashed #e6edf3;white-space:pre-wrap}
   
   .historyList{display:flex;flex-direction:column;gap:10px}
   .historyItem{padding:10px;border-radius:8px;background:#fff;border:1px solid #f1f5f9}

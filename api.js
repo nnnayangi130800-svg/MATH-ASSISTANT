@@ -1,53 +1,50 @@
-// api/ask.js
+// api/ask.js (OpenAI, robust)
 export default async function handler(req, res) {
-    if (req.method !== 'POST') return res.status(405).send('Method Not Allowed');
+    if (req.method !== 'POST') return res.status(405).json({ error: 'Method Not Allowed' });
   
-    try{
+    try {
       const { question } = req.body || {};
-      if(!question) return res.status(400).json({ error: 'Missing question' });
+      if (!question) return res.status(400).json({ error: 'Missing question in body' });
   
-      const API_KEY = process.env.USECHAT_API_KEY || '';
-      if(!API_KEY){
-        return res.status(500).json({ error: 'AI API key not configured (USECHAT_API_KEY)' });
+      const API_KEY = process.env.OPENAI_API_KEY;
+      if (!API_KEY) {
+        return res.status(500).json({ error: 'OPENAI_API_KEY not configured in environment variables' });
       }
   
-      // build prompt for math tutor (Indonesian by default)
-      const prompt = `You are a helpful math tutor. Answer clearly and step-by-step. Question:\n\n${question}\n\n`;
+      const prompt = `Kamu adalah tutor matematika untuk siswa SMA. Jawab pertanyaan berikut dengan langkah-langkah yang jelas, terstruktur, dan singkat.\n\nPertanyaan:\n${question}\n\nBerikan jawaban langkah demi langkah dalam bahasa Indonesia.`;
   
-      // Example request to UseChat-like endpoint (adjust if different provider)
       const payload = {
-        model: 'gpt-4o-mini', // provider-specific model name
+        model: 'gpt-4.1-mini',
         messages: [
-          { role: 'system', content: 'You are a helpful math tutor. Be concise but clear.' },
+          { role: 'system', content: 'You are a helpful math tutor. Provide clear step-by-step answers in Indonesian.' },
           { role: 'user', content: prompt }
         ],
-        max_tokens: 800
+        max_tokens: 900,
+        temperature: 0.2
       };
   
-      const r = await fetch('https://api.usechat.ai/v1/chat/completions', {
+      const r = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${API_KEY}`
         },
-        body: JSON.stringify(payload),
-        // Note: Vercel has its own function timeout (default 10s on Hobby). If your provider is slow,
-        // consider using a provider with faster response or reduce model/timeout expectations.
+        body: JSON.stringify(payload)
       });
   
-      if(!r.ok){
-        const txt = await r.text().catch(()=>null);
-        return res.status(502).json({ error: 'Upstream error', details: txt || r.statusText });
+      if (!r.ok) {
+        const txt = await r.text().catch(()=>'');
+        console.error('OpenAI upstream error', r.status, txt);
+        return res.status(502).json({ error: 'Upstream OpenAI error', status: r.status, details: txt });
       }
   
       const json = await r.json();
-      // adapt to provider response shape
-      const answer = json?.choices?.[0]?.message?.content || json?.result || JSON.stringify(json);
+      const answer = json?.choices?.[0]?.message?.content || '(no answer)';
   
       return res.status(200).json({ answer });
-    } catch(err){
-      console.error(err);
-      return res.status(500).json({ error: err.message });
+    } catch (err) {
+      console.error('Server exception:', err);
+      return res.status(500).json({ error: err.message || 'Server error' });
     }
   }
   

@@ -8,46 +8,27 @@
 </head>
 <body>
   <div class="container">
-    <!-- Header -->
     <header class="header">
       <h1>Math Assistant</h1>
     </header>
 
-    <!-- Home (Tiles) -->
+    <!-- HOME PAGE (Tiles) -->
     <section id="home" class="page active">
       <div class="tiles">
-        <button class="tile tile-1" data-target="tanya">
-          <div class="icon">💬</div>
-          <div class="label">Tanya AI</div>
-        </button>
-        <button class="tile tile-2" data-target="rumus">
-          <div class="icon">📘</div>
-          <div class="label">Belajar Rumus</div>
-        </button>
-        <button class="tile tile-3" data-target="latihan">
-          <div class="icon">📝</div>
-          <div class="label">Latihan Soal</div>
-        </button>
-        <button class="tile tile-4" data-target="tips">
-          <div class="icon">⚡</div>
-          <div class="label">Tips Cepat</div>
-        </button>
-        <button class="tile tile-5" data-target="about">
-          <div class="icon">ℹ️</div>
-          <div class="label">Tentang</div>
-        </button>
-        <button class="tile tile-6" data-target="contact">
-          <div class="icon">📤</div>
-          <div class="label">Kirim Saran</div>
-        </button>
+        <button class="tile tile-1" data-target="tanya"><div class="icon">💬</div><div class="label">Tanya AI</div></button>
+        <button class="tile tile-2" data-target="rumus"><div class="icon">📘</div><div class="label">Belajar Rumus</div></button>
+        <button class="tile tile-3" data-target="latihan"><div class="icon">📝</div><div class="label">Latihan Soal</div></button>
+        <button class="tile tile-4" data-target="tips"><div class="icon">⚡</div><div class="label">Tips Cepat</div></button>
+        <button class="tile tile-5" data-target="about"><div class="icon">ℹ️</div><div class="label">Tentang</div></button>
+        <button class="tile tile-6" data-target="contact"><div class="icon">📤</div><div class="label">Kirim Saran</div></button>
       </div>
     </section>
 
-    <!-- Tanya AI Page -->
+    <!-- TANYA AI PAGE -->
     <section id="tanya" class="page">
       <div class="card">
-        <label class="lbl">Tulis pertanyaan matematika kamu di sini…</label>
-        <textarea id="questionInput" placeholder="Contoh: Rumus luas segitiga atau hitung keliling lingkaran r=7"></textarea>
+        <label class="lbl">Tulis pertanyaan matematika kamu di sini...</label>
+        <textarea id="questionInput" placeholder="Contoh: Volume kubus dengan panjang rusuk 12"></textarea>
         <div class="controls">
           <button id="sendBtn" class="btn primary">Kirim Pertanyaan</button>
           <button id="copyBtn" class="btn secondary">Salin Jawaban</button>
@@ -63,10 +44,10 @@
       </div>
     </section>
 
-    <!-- Belajar Rumus Page -->
+    <!-- RUMUS PAGE -->
     <section id="rumus" class="page">
       <div class="card">
-        <label class="lbl">Rumus</label>
+        <label class="lbl">Rumus - Kelas 10 SMA Semester 1 (Kurikulum Merdeka)</label>
         <ul id="rumusList" class="list"></ul>
       </div>
       <div class="card">
@@ -74,7 +55,7 @@
       </div>
     </section>
 
-    <!-- Latihan Soal Page -->
+    <!-- LATIHAN PAGE -->
     <section id="latihan" class="page">
       <div class="card">
         <label class="lbl">Latihan Soal</label>
@@ -85,7 +66,7 @@
       </div>
     </section>
 
-    <!-- Tips Cepat Page -->
+    <!-- TIPS PAGE -->
     <section id="tips" class="page">
       <div class="card tipsGrid" id="tipsGrid"></div>
       <div class="card">
@@ -93,16 +74,16 @@
       </div>
     </section>
 
-    <!-- About -->
+    <!-- ABOUT -->
     <section id="about" class="page">
       <div class="card">
         <h3>Tentang Math Assistant</h3>
-        <p>Aplikasi ringan untuk menjawab pertanyaan matematika. Gratis, sederhana, dan cocok untuk siswa & guru.</p>
+        <p>Aplikasi ringan untuk membantu siswa Kelas 10 SMA (Semester 1) belajar matematika: rumus, latihan langkah demi langkah, dan tips cepat.</p>
         <button id="backFromAbout" class="btn ghost">Kembali</button>
       </div>
     </section>
 
-    <!-- Contact -->
+    <!-- CONTACT -->
     <section id="contact" class="page">
       <div class="card">
         <label class="lbl">Kirim Saran</label>
