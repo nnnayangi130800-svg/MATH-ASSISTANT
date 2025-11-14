@@ -1,30 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Math Assistant</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Assistant</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
+    <h1>Math Assistant</h1>
 
-  <h1 id="title">Math Assistant</h1>
+    <textarea id="userInput" placeholder="Tanyakan soal matematika di sini..."></textarea>
 
-  <select id="languageSelect">
-    <option value="id">Bahasa Indonesia</option>
-    <option value="en">English</option>
-  </select>
+    <button id="sendBtn">Kirim</button>
+    <button id="copyBtn">Salin Jawaban</button>
+    <button id="speakBtn">Dengarkan 🔊</button>
 
-  <textarea id="userInput" placeholder="Tanyakan soal matematika di sini..."></textarea>
+    <div id="responseBox"></div>
 
-  <button id="sendBtn">Kirim</button>
-
-  <div id="responseBox"></div>
-
-</div>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

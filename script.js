@@ -1,22 +1,34 @@
-document.getElementById("sendBtn").addEventListener("click", async () => {
-    
+document.getElementById("sendBtn").onclick = askAI;
+document.getElementById("copyBtn").onclick = copyText;
+document.getElementById("speakBtn").onclick = speakText;
+
+async function askAI() {
     const question = document.getElementById("userInput").value;
-    const lang = document.getElementById("languageSelect").value;
+    const resBox = document.getElementById("responseBox");
 
-    if (!question.trim()) {
-        alert("Pertanyaan tidak boleh kosong!");
-        return;
-    }
+    resBox.textContent = "Sedang memproses...";
 
-    document.getElementById("responseBox").innerHTML = "⏳ Sedang memproses...";
-
-    const res = await fetch("/api/chat", {
+    const res = await fetch("/api/ask", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ question, lang })
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ question })
     });
 
     const data = await res.json();
+    resBox.textContent = data.answer;
+}
 
-    document.getElementById("responseBox").innerHTML = data.answer;
-});
+// Salin jawaban ke clipboard
+function copyText() {
+    const text = document.getElementById("responseBox").textContent;
+    navigator.clipboard.writeText(text);
+    alert("Jawaban telah disalin!");
+}
+
+// Text-to-speech
+function speakText() {
+    const text = document.getElementById("responseBox").textContent;
+    const msg = new SpeechSynthesisUtterance(text);
+    msg.lang = "id-ID";
+    speechSynthesis.speak(msg);
+}
