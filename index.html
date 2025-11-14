@@ -3,104 +3,378 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Math Assistant</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Math Assistant — Rumus & Latihan (Kelas 10 Sem 1)</title>
+  <style>
+    :root{
+      --bg:#f2f5f8; --primary:#1B3C73; --tile:#457B9D; --muted:#6b7280;
+      --card:#ffffff; --accent:#123;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:var(--bg);color:#0f172a}
+    .wrap{max-width:980px;margin:18px auto;padding:20px}
+    header{text-align:center;margin-bottom:18px}
+    header h1{color:var(--primary);font-size:34px;margin:6px 0}
+    .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+    .tile{background:var(--card);border-radius:12px;padding:18px;text-align:center;box-shadow:0 6px 14px rgba(11,22,45,0.06);cursor:pointer;border:0}
+    .tile .icon{font-size:28px}
+    .tile .label{margin-top:8px;font-weight:700;color:#123}
+    .page{display:none}
+    .page.active{display:block}
+    .card{background:var(--card);border-radius:12px;padding:16px;box-shadow:0 2px 8px rgba(11,22,45,0.04);margin-bottom:12px}
+    .lbl{font-weight:800;color:var(--primary);margin-bottom:8px}
+    pre.code{background:#fbfdff;padding:12px;border-radius:8px;border:1px solid #e6edf3;white-space:pre-wrap;font-family:Menlo,monospace}
+    ul.rumus-list{list-style:none;padding:0;margin:0}
+    ul.rumus-list li{padding:12px 0;border-bottom:1px solid #f1f5f9}
+    .rumus-title{font-weight:800;margin-bottom:6px}
+    .controls{display:flex;gap:10px;align-items:center;margin-top:10px}
+    button.btn{padding:10px 14px;border-radius:8px;border:0;cursor:pointer;font-weight:700}
+    button.primary{background:var(--tile);color:#fff}
+    button.ghost{background:transparent;border:1px solid #e6edf3;color:var(--primary)}
+    .list{list-style:none;padding:0;margin:0}
+    .list li{padding:12px;border-bottom:1px solid #f1f5f9}
+    .ans{margin-top:10px;padding:10px;background:#fbfdff;border-radius:8px;border:1px dashed #e6edf3;display:none;white-space:pre-wrap}
+    .tip{background:#fff7d9;border-radius:10px;padding:12px;margin-bottom:10px;border:1px solid #f6eecb}
+    footer{text-align:center;color:var(--muted);margin-top:20px;padding:12px}
+    /* responsive */
+    @media (max-width:720px){
+      .tiles{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:420px){
+      .tiles{grid-template-columns:repeat(1,1fr)}
+    }
+
+    /* small helpers */
+    .small-muted{color:var(--muted);font-size:14px}
+    .qr-wrap{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+    .qr-wrap img{width:110px;height:110px;border-radius:8px;border:1px solid #eaf1f8}
+    .section-title{font-weight:900;color:var(--primary);margin-bottom:10px}
+  </style>
 </head>
 <body>
-  <div class="container">
-    <header class="header">
+  <div class="wrap">
+    <header>
       <h1>Math Assistant</h1>
+      <div class="small-muted">Rumus, latihan (step-by-step), dan tips cepat — Kelas 10 SMA Semester 1 (Kurikulum Merdeka)</div>
     </header>
 
-    <!-- HOME PAGE (Tiles) -->
-    <section id="home" class="page active">
-      <div class="tiles">
-        <button class="tile tile-1" data-target="tanya"><div class="icon">💬</div><div class="label">Tanya AI</div></button>
-        <button class="tile tile-2" data-target="rumus"><div class="icon">📘</div><div class="label">Belajar Rumus</div></button>
-        <button class="tile tile-3" data-target="latihan"><div class="icon">📝</div><div class="label">Latihan Soal</div></button>
-        <button class="tile tile-4" data-target="tips"><div class="icon">⚡</div><div class="label">Tips Cepat</div></button>
-        <button class="tile tile-5" data-target="about"><div class="icon">ℹ️</div><div class="label">Tentang</div></button>
-        <button class="tile tile-6" data-target="contact"><div class="icon">📤</div><div class="label">Kirim Saran</div></button>
-      </div>
-    </section>
-
-    <!-- TANYA AI PAGE -->
-    <section id="tanya" class="page">
-      <div class="card">
-        <label class="lbl">Tulis pertanyaan matematika kamu di sini...</label>
-        <textarea id="questionInput" placeholder="Contoh: Volume kubus dengan panjang rusuk 12"></textarea>
-        <div class="controls">
-          <button id="sendBtn" class="btn primary">Kirim Pertanyaan</button>
-          <button id="copyBtn" class="btn secondary">Salin Jawaban</button>
-          <button id="backFromTanya" class="btn ghost">Kembali</button>
-          <div id="status" class="status"></div>
-        </div>
-        <div id="answerBox" class="answerBox"></div>
-      </div>
-
-      <div class="card">
-        <label class="lbl">Riwayat Pertanyaan</label>
-        <div id="historyList" class="historyList"></div>
-      </div>
-    </section>
+    <!-- NAV TILES -->
+    <div class="tiles">
+      <button class="tile" data-target="rumusPage"><div class="icon">📘</div><div class="label">Belajar Rumus</div></button>
+      <button class="tile" data-target="latihanPage"><div class="icon">📝</div><div class="label">Latihan Soal</div></button>
+      <button class="tile" data-target="tipsPage"><div class="icon">⚡</div><div class="label">Tips Cepat</div></button>
+      <button class="tile" data-target="explainPage"><div class="icon">🔎</div><div class="label">Penjelasan (QR)</div></button>
+      <button class="tile" data-target="aboutPage"><div class="icon">ℹ️</div><div class="label">Tentang</div></button>
+      <button class="tile" data-target="contactPage"><div class="icon">📤</div><div class="label">Kirim Saran</div></button>
+    </div>
 
     <!-- RUMUS PAGE -->
-    <section id="rumus" class="page">
+    <section id="rumusPage" class="page active">
       <div class="card">
-        <label class="lbl">Rumus - Kelas 10 SMA Semester 1 (Kurikulum Merdeka)</label>
-        <ul id="rumusList" class="list"></ul>
-      </div>
-      <div class="card">
-        <button id="backFromRumus" class="btn ghost">Kembali</button>
+        <div class="section-title">Rumus — Kelas 10 SMA Semester 1 (Kurikulum Merdeka)</div>
+        <ul class="rumus-list">
+          <li>
+            <div class="rumus-title">Eksponen — Aturan Umum</div>
+            <pre class="code">
+a^m × a^n = a^(m+n)
+a^m ÷ a^n = a^(m−n)   (a ≠ 0)
+(a^m)^n = a^(m×n)
+(ab)^n = a^n b^n
+a^(−n) = 1 / a^n
+a^(m/n) = ⁿ√(a^m) = (ⁿ√a)^m
+            </pre>
+          </li>
+
+          <li>
+            <div class="rumus-title">Logaritma</div>
+            <pre class="code">
+log_a b = c   ⇔   a^c = b
+log_a(xy) = log_a x + log_a y
+log_a(x/y) = log_a x − log_a y
+log_a(x^k) = k · log_a x
+change of base: log_a b = log_c b / log_c a
+            </pre>
+          </li>
+
+          <li>
+            <div class="rumus-title">Persamaan Linear & Fungsi Linear</div>
+            <pre class="code">
+Persamaan garis:  y = m x + c
+Gradien m = (y2 − y1) / (x2 − x1)
+Titik potong sumbu-y = c
+            </pre>
+          </li>
+
+          <li>
+            <div class="rumus-title">Sistem Persamaan Linear (2 variabel)</div>
+            <pre class="code">
+Metode: substitusi, eliminasi (grafik)
+Contoh Cramer (2×2) jika perlu:
+| a b | |x| = |e|
+| c d | |y|   |f|
+det = a d − b c
+            </pre>
+          </li>
+
+          <li>
+            <div class="rumus-title">Fungsi Kuadrat</div>
+            <pre class="code">
+y = a x^2 + b x + c
+Diskriminan: D = b^2 − 4 a c
+Jika D > 0 → 2 akar real; D = 0 → 1 akar; D < 0 → tidak ada akar real
+Titik puncak (vertex): x_v = −b / (2a)
+            </pre>
+          </li>
+
+          <li>
+            <div class="rumus-title">Trigonometri Dasar (segitiga siku)</div>
+            <pre class="code">
+sin θ = opposite / hypotenuse
+cos θ = adjacent / hypotenuse
+tan θ = opposite / adjacent = sin θ / cos θ
+Identitas: sin^2 θ + cos^2 θ = 1
+            </pre>
+          </li>
+
+          <li>
+            <div class="rumus-title">Bangun Datar (Ringkasan)</div>
+            <pre class="code">
+Persegi: Keliling = 4 s ; Luas = s^2
+Persegi panjang: Luas = p × l ; Keliling = 2(p + l)
+Segitiga: Luas = 1/2 × alas × tinggi
+Lingkaran: Luas = π r^2 ; Keliling = 2 π r
+            </pre>
+          </li>
+
+          <li>
+            <div class="rumus-title">Statistika & Peluang</div>
+            <pre class="code">
+Rata-rata (Mean) = Σx / n
+Median = nilai tengah setelah diurut
+Modus = nilai yang sering muncul (frekuensi tertinggi)
+Peluang (sederhana) = favorable outcomes / total outcomes
+            </pre>
+          </li>
+        </ul>
       </div>
     </section>
 
     <!-- LATIHAN PAGE -->
-    <section id="latihan" class="page">
+    <section id="latihanPage" class="page">
       <div class="card">
-        <label class="lbl">Latihan Soal</label>
-        <ul id="latihanList" class="list"></ul>
-      </div>
-      <div class="card">
-        <button id="backFromLatihan" class="btn ghost">Kembali</button>
+        <div class="section-title">Latihan Soal — (Kelas 10 Sem 1)</div>
+        <ul id="latihanList" class="list">
+          <!-- JS akan render soal di sini -->
+        </ul>
       </div>
     </section>
 
     <!-- TIPS PAGE -->
-    <section id="tips" class="page">
-      <div class="card tipsGrid" id="tipsGrid"></div>
+    <section id="tipsPage" class="page">
       <div class="card">
-        <button id="backFromTips" class="btn ghost">Kembali</button>
+        <div class="section-title">Tips Cepat — Aturan & Contoh (Kelas 10 Sem 1)</div>
+
+        <!-- Tips: vertical list -->
+        <div id="tipsList">
+          <!-- JS akan render tips di sini -->
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPLAIN PAGE (target QR) -->
+    <section id="explainPage" class="page">
+      <div class="card">
+        <div class="section-title">Penjelasan Singkat (dapat dibuka via QR)</div>
+
+        <div class="qr-wrap" style="margin-bottom:12px">
+          <div>
+            <div class="small-muted">Pindai QR — akan membuka bagian ini (penjelasan singkat)</div>
+            <img id="qrImage" alt="QR code" src="" />
+          </div>
+          <div style="flex:1">
+            <p>Kamu memindai QR yang mengarah ke halaman ini. Bagian ini berisi ringkasan rumus + contoh penggunaan singkat.</p>
+            <ul>
+              <li><strong>Eksponen (contoh):</strong> 2^3 × 2^2 = 2^(3+2) = 2^5 = 32</li>
+              <li><strong>Logaritma (contoh):</strong> log_2 8 = 3 karena 2^3 = 8</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="small-muted">Catatan: QR dibuat dari URL halaman saat ini (dinamis).</div>
+        <div style="margin-top:12px">
+          <button class="btn ghost" data-target="rumusPage">Kembali ke Rumus</button>
+        </div>
       </div>
     </section>
 
     <!-- ABOUT -->
-    <section id="about" class="page">
+    <section id="aboutPage" class="page">
       <div class="card">
-        <h3>Tentang Math Assistant</h3>
-        <p>Aplikasi ringan untuk membantu siswa Kelas 10 SMA (Semester 1) belajar matematika: rumus, latihan langkah demi langkah, dan tips cepat.</p>
-        <button id="backFromAbout" class="btn ghost">Kembali</button>
+        <h3>Tentang</h3>
+        <p>Halaman ini berisi kumpulan rumus, latihan terstruktur dengan langkah, dan tips cepat untuk Kelas 10 SMA Semester 1 (Kurikulum Merdeka). Ini dirancang agar mudah dibaca di HP maupun desktop.</p>
+        <div style="margin-top:12px"><button class="btn ghost" data-target="home">Kembali ke Home</button></div>
       </div>
     </section>
 
     <!-- CONTACT -->
-    <section id="contact" class="page">
+    <section id="contactPage" class="page">
       <div class="card">
-        <label class="lbl">Kirim Saran</label>
-        <textarea id="contactInput" placeholder="Masukkan saran atau masukan..."></textarea>
-        <div class="controls">
-          <button id="sendContact" class="btn primary">Kirim</button>
-          <button id="backFromContact" class="btn ghost">Kembali</button>
-          <div id="contactStatus" class="status"></div>
+        <h3>Kirim Saran</h3>
+        <textarea id="contactInput" placeholder="Masukkan saran (akan tersimpan lokal)"></textarea>
+        <div class="controls" style="margin-top:10px">
+          <button class="btn primary" id="sendContact">Kirim</button>
+          <button class="btn ghost" data-target="home">Kembali</button>
+          <div id="contactStatus" class="small-muted"></div>
         </div>
       </div>
     </section>
 
     <footer class="footer">
-      <small>Warna tema: Biru gelap (#1B3C73) • Dibuat untuk deploy ke Vercel</small>
+      <small>Warna tema: Biru gelap (#1B3C73) • Materi: Kelas 10 SMA Semester 1 (Kurikulum Merdeka)</small>
     </footer>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    // --- SPA navigation (tiles & buttons)
+    document.querySelectorAll('.tile, button[data-target]').forEach(btn=>{
+      btn.addEventListener('click', ()=> {
+        const target = btn.dataset.target;
+        if(target) openPage(target);
+      });
+    });
+    function openPage(id){
+      document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+      const el = document.getElementById(id);
+      if(el) el.classList.add('active');
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+
+    // --- Data: Latihan (topik sesuai Kelas 10 Sem 1 Kurikulum Merdeka)
+    const latihanData = [
+      {
+        q: 'Volume kubus dengan panjang rusuk 12 (satuan)?',
+        a: `Langkah 1: Rumus volume kubus V = s^3
+Langkah 2: Masukkan s = 12 → V = 12^3
+Langkah 3: 12^3 = 12 × 12 × 12 = 1728
+Jadi, V = 1728 satuan^3`
+      },
+      {
+        q: 'Hitung keliling persegi dengan sisi 5 cm.',
+        a: `Langkah 1: Rumus keliling persegi K = 4 × sisi
+Langkah 2: Masukkan sisi = 5 → K = 4 × 5
+Langkah 3: K = 20 cm
+Jadi keliling = 20 cm`
+      },
+      {
+        q: 'Hitung luas segitiga dengan alas 10 cm dan tinggi 12 cm.',
+        a: `Langkah 1: Rumus luas segitiga L = 1/2 × alas × tinggi
+Langkah 2: Masukkan angka → L = 1/2 × 10 × 12
+Langkah 3: L = 0.5 × 120 = 60
+Jadi, L = 60 cm²`
+      },
+      {
+        q: 'Selesaikan sistem: 2x + 3y = 13 ; x − y = 1 (gunakan substitusi).',
+        a: `Langkah 1: Dari x − y = 1 → x = y + 1
+Langkah 2: Substitusi ke persamaan pertama: 2(y+1) + 3y = 13
+Langkah 3: 2y + 2 + 3y = 13 → 5y + 2 = 13
+Langkah 4: 5y = 11 → y = 11/5
+Langkah 5: x = y + 1 = 11/5 + 1 = 16/5
+Jadi x = 16/5, y = 11/5`
+      },
+      {
+        q: 'Jika 2^3 × 2^(−1) × (2^2)^3, hitung hasilnya (eksponen).',
+        a: `Langkah 1: 2^3 × 2^(−1) = 2^(3 + (−1)) = 2^2
+Langkah 2: (2^2)^3 = 2^(2×3) = 2^6
+Langkah 3: 2^2 × 2^6 = 2^(2+6) = 2^8
+Langkah 4: 2^8 = 256
+Jadi hasil = 256`
+      },
+      {
+        q: 'Tentukan jumlah akar real dari fungsi kuadrat y = x^2 − 4x + 3.',
+        a: `Langkah 1: Hitung diskriminan D = b^2 − 4ac = (−4)^2 − 4(1)(3) = 16 − 12 = 4
+Langkah 2: Karena D > 0 → ada 2 akar real
+Langkah 3: Jika ingin nilai akar: x = (4 ± √4)/2 = (4 ± 2)/2 → x = 3 atau x = 1`
+      },
+      {
+        q: 'Jika sebuah dadu fair dilempar sekali, peluang muncul angka 3?',
+        a: `Langkah 1: Total kemungkinan = 6 (angka 1–6)
+Langkah 2: Kejadian menguntungkan = 1 (angka 3)
+Langkah 3: Peluang = 1 / 6`
+      },
+    ];
+
+    // render latihan
+    const latihanList = document.getElementById('latihanList');
+    latihanData.forEach((item, idx) => {
+      const li = document.createElement('li');
+      li.innerHTML = `<strong>${escapeHtml(item.q)}</strong>
+        <div style="margin-top:8px">
+          <button class="btn ghost" onclick="toggleAns(${idx})">Tampilkan Jawaban (Langkah)</button>
+        </div>
+        <div id="ans-${idx}" class="ans">${escapeHtml(item.a)}</div>`;
+      latihanList.appendChild(li);
+    });
+
+    // toggle answer visibility
+    function toggleAns(i){
+      const el = document.getElementById('ans-' + i);
+      if(!el) return;
+      el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+    }
+    window.toggleAns = toggleAns;
+
+    // --- Tips (vertical)
+    const tips = [
+      {rule:'Eksponen — perkalian', example:'Jika basis sama, tambahkan pangkat. Contoh: a^m × a^n = a^(m+n). Jadi 2^3 × 2^4 = 2^7.'},
+      {rule:'Eksponen — pembagian', example:'Jika basis sama, kurangi pangkat. Contoh: a^5 ÷ a^2 = a^(5−2) = a^3.'},
+      {rule:'Eksponen — pangkat dari pangkat', example:'(a^m)^n = a^(m×n). Contoh: (2^2)^3 = 2^6.'},
+      {rule:'Logaritma — perkalian', example:'log_a(xy) = log_a x + log_a y. Gunakan untuk memecah faktor.'},
+      {rule:'Logaritma — pangkat', example:'log_a(x^k) = k · log_a x. Contoh: log_2(8^2) = 2 · log_2 8.'},
+      {rule:'Fungsi kuadrat — diskriminan', example:'D = b^2 − 4ac. D>0 → 2 akar real; D=0 → 1 akar; D<0 → 0 akar real.'},
+      {rule:'Trigonometri — hubungan', example:'tan θ = sin θ / cos θ. Gunakan jika sudah tahu sin & cos.'},
+      {rule:'Peluang — aturan dasar', example:'Peluang = jumlah kejadian menguntungkan ÷ jumlah total kejadian. Contoh dadu: 1/6.'}
+    ];
+
+    const tipsList = document.getElementById('tipsList');
+    tips.forEach(t=>{
+      const d = document.createElement('div');
+      d.className = 'tip';
+      d.innerHTML = `<strong>${escapeHtml(t.rule)}</strong><div style="margin-top:6px">${escapeHtml(t.example)}</div>`;
+      tipsList.appendChild(d);
+    });
+
+    // --- QR: generate QR image (Google Chart API) to current page + #explain
+    const qrImg = document.getElementById('qrImage');
+    function setQR(){
+      try{
+        const url = (window.location.href.split('#')[0]) + '#explain';
+        const encoded = encodeURIComponent(url);
+        const src = 'https://chart.googleapis.com/chart?cht=qr&chs=220x220&chl=' + encoded;
+        qrImg.src = src;
+      }catch(e){
+        // fallback: hide QR
+        qrImg.style.display = 'none';
+      }
+    }
+    setQR();
+
+    // --- Contact local save
+    document.getElementById('sendContact').addEventListener('click', ()=> {
+      const txt = document.getElementById('contactInput').value.trim();
+      const status = document.getElementById('contactStatus');
+      if(!txt){ status.textContent = 'Isi saran dulu ya.'; return; }
+      const key = 'math_assistant_contacts';
+      const arr = JSON.parse(localStorage.getItem(key) || '[]');
+      arr.push({text:txt,ts:Date.now()});
+      localStorage.setItem(key, JSON.stringify(arr));
+      status.textContent = 'Terima kasih! Saran tersimpan (lokal).';
+      document.getElementById('contactInput').value = '';
+    });
+
+    // helper: escape html
+    function escapeHtml(s){ return (s+'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+    // Accessibility: allow opening explain if URL has #explain
+    if(window.location.hash === '#explain') openPage('explainPage');
+  </script>
 </body>
 </html>
