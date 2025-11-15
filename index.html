@@ -1,59 +1,47 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math Assistant — Kelas 10 SMA</title>
+    <title>Math Assistant - Kelas 10</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div class="wrap">
+<header>
+    <h1>Math Assistant Kelas 10</h1>
+    <div class="top-controls">
+        <input type="text" id="searchBar" placeholder="Cari materi...">
+        <button id="darkModeBtn">Dark Mode</button>
+    </div>
+</header>
 
-    <header>
-        <h1>Math Assistant</h1>
-        <p class="sub">Rumus • Latihan • Tips Cepat — Kelas 10 SMA Semester 1</p>
-    </header>
+<!-- TAB MENU -->
+<div class="tabs">
+    <button class="tab-btn active" data-tab="materi">Materi</button>
+    <button class="tab-btn" data-tab="latihan">Latihan Soal</button>
+    <button class="tab-btn" data-tab="trik">Trik Cepat</button>
+</div>
 
-    <!-- HOME TILES -->
-    <section id="homePage" class="page active">
-        <div class="tiles">
-            <button class="tile" data-target="rumusPage">📘<br>Rumus</button>
-            <button class="tile" data-target="latihanPage">📝<br>Latihan</button>
-            <button class="tile" data-target="tipsPage">⚡<br>Tips Cepat</button>
-            <button class="tile" data-target="aboutPage">ℹ️<br>Tentang</button>
-        </div>
-    </section>
+<!-- TAB CONTENT -->
 
-    <!-- RUMUS PAGE -->
-    <section id="rumusPage" class="page">
-        <h2 class="title">Rumus — Kelas 10 Semester 1</h2>
-        <div id="rumusContainer"></div>
-        <button class="back" data-target="homePage">Kembali</button>
-    </section>
+<!-- MATERI -->
+<div id="materi" class="tab-content active">
+    <div class="materi-list" id="materiList"></div>
+    <div class="materi-detail" id="materiDetail"></div>
+</div>
 
-    <!-- LATIHAN PAGE -->
-    <section id="latihanPage" class="page">
-        <h2 class="title">Latihan Soal (Step-by-Step)</h2>
-        <ul id="latihanList"></ul>
-        <button class="back" data-target="homePage">Kembali</button>
-    </section>
+<!-- LATIHAN SOAL -->
+<div id="latihan" class="tab-content">
+    <div class="materi-list" id="latihanList"></div>
+    <div class="materi-detail" id="latihanDetail"></div>
+</div>
 
-    <!-- TIPS PAGE -->
-    <section id="tipsPage" class="page">
-        <h2 class="title">Tips Cepat — Kelas 10</h2>
-        <div id="tipsContainer"></div>
-        <button class="back" data-target="homePage">Kembali</button>
-    </section>
-
-    <!-- ABOUT PAGE -->
-    <section id="aboutPage" class="page">
-        <h2 class="title">Tentang Aplikasi</h2>
-        <p>Aplikasi ini membantu siswa mempelajari rumus, latihan, dan tips cepat
-           berdasarkan materi Kelas 10 SMA Semester 1 Kurikulum Merdeka.</p>
-        <button class="back" data-target="homePage">Kembali</button>
-    </section>
-
+<!-- TRIK CEPAT -->
+<div id="trik" class="tab-content">
+    <div class="trik-container" id="trikContainer"></div>
 </div>
 
 <script src="script.js"></script>
