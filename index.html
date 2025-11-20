@@ -1,85 +1,58 @@
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Math Assistant — Kelas 10 SMA</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Assistant — Kelas 10 SMA</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <div class="wrap">
+
+<!-- WRAPPER -->
+<div class="wrap">
+
+    <!-- HEADER -->
     <header>
-      <h1>Math Assistant</h1>
-      <div class="sub">Materi • Latihan (kuis interaktif) • Trik Cepat — Kelas 10 SMA Semester 1</div>
-      <div class="header-controls">
-        <input id="searchBar" placeholder="Cari materi..." aria-label="Cari materi">
-        <button id="darkToggle" aria-label="Toggle dark mode">🌙</button>
-      </div>
+        <h1>Math Assistant</h1>
+        <p class="sub">Materi • Latihan • Trik Cepat — Kelas 10 SMA Semester 1</p>
     </header>
 
-    <!-- NAV TILES -->
+    <!-- SEARCH -->
+    <div class="search-box">
+        <input id="searchInput" oninput="searchContent()" placeholder="Cari materi…">
+    </div>
+
+    <!-- DARK MODE -->
+    <div class="darkmode-box">
+        <label class="switch">
+            <input type="checkbox" id="darkToggle" onchange="toggleDarkMode()">
+            <span class="slider round"></span>
+        </label>
+        <span class="dm-text">Dark Mode</span>
+    </div>
+
+    <!-- HOME PAGE -->
     <section id="homePage" class="page active">
-      <div class="tiles">
-        <button class="tile" data-target="materiPage">📘<br>Materi</button>
-        <button class="tile" data-target="latihanPage">📝<br>Latihan</button>
-        <button class="tile" data-target="trikPage">⚡<br>Trik Cepat</button>
-        <button class="tile" data-target="aboutPage">ℹ️<br>Tentang</button>
-      </div>
-    </section>
 
-    <!-- MATERI PAGE -->
-    <section id="materiPage" class="page">
-      <h2 class="title">Materi</h2>
-      <div id="materiList" class="list"></div>
-      <button class="back" data-target="homePage">Kembali</button>
-    </section>
-
-    <!-- MATERI DETAIL PAGE -->
-    <section id="materiDetailPage" class="page">
-      <div id="materiDetail" class="block"></div>
-      <button class="back" data-target="materiPage">Kembali ke Materi</button>
-    </section>
-
-    <!-- LATIHAN PAGE -->
-    <section id="latihanPage" class="page">
-      <h2 class="title">Latihan & Kuis</h2>
-      <div id="latihanList" class="list"></div>
-      <button class="back" data-target="homePage">Kembali</button>
-    </section>
-
-    <!-- LATIHAN DETAIL / QUIZ PAGE -->
-    <section id="latihanDetailPage" class="page">
-      <div id="latihanDetail" class="block"></div>
-      <div id="quizArea" class="block" style="display:none"></div>
-      <button class="back" data-target="latihanPage">Kembali ke Latihan</button>
-    </section>
-
-    <!-- TRIK PAGE -->
-    <section id="trikPage" class="page">
-      <h2 class="title">Trik Cepat</h2>
-      <div id="trikList"></div>
-      <button class="back" data-target="homePage">Kembali</button>
-    </section>
-
-    <!-- ABOUT PAGE -->
-    <section id="aboutPage" class="page">
-      <h2 class="title">Tentang Aplikasi</h2>
-      <p>Aplikasi ini berisi materi lengkap Kelas 10 SMA Semester 1 (Kurikulum Merdeka), latihan soal (5 rutin + 5 non-rutin per materi) disajikan sebagai kuis interaktif. Jawaban benar menampilkan penjelasan rinci; jawaban salah memberi tahu untuk mencoba lagi.</p>
-      <div style="margin-top:12px" class="card">
-        <div class="icon">📷</div>
-        <div>
-          <div class="title-small">Contoh tampilan (screenshot)</div>
-          <div class="subtitle">Gambar dari perangkatmu</div>
-          <img src="/mnt/data/Screenshot 2025-11-14 134101.png" alt="screenshot" style="max-width:220px;border-radius:8px;margin-top:8px;border:1px solid #e6edf3">
+        <div class="tiles">
+            <button class="tile" onclick="loadMateri()">📘 <br> Materi</button>
+            <button class="tile" onclick="loadLatihan()">📝 <br> Latihan Soal</button>
+            <button class="tile" onclick="loadTrikCepat()">⚡ <br> Trik Cepat</button>
+            <button class="tile" onclick="loadTentang()">ℹ️ <br> Tentang</button>
         </div>
-      </div>
-      <button class="back" data-target="homePage">Kembali</button>
+
     </section>
 
-    <footer class="footer">Materi: Kelas 10 SMA Semester 1 — Kurikulum Merdeka</footer>
-  </div>
+    <!-- CONTENT PAGE (DINAMIS) -->
+    <section id="contentPage" class="page">
+        <div id="content"></div>
+        <button class="back" onclick="goHome()">Kembali</button>
+    </section>
 
-  <script src="script.js"></script>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
