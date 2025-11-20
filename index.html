@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Math Assistant — Kelas 10 SMA</title>
+  <title>Math Assistant — Kelas 10 SMA (PART 1)</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -13,7 +13,7 @@
       <h1>Math Assistant</h1>
       <div class="sub">Materi • Latihan (kuis interaktif) • Trik Cepat — Kelas 10 SMA Semester 1</div>
       <div class="header-controls">
-        <input id="searchBar" placeholder="Cari materi..." aria-label="Cari materi">
+        <input id="searchBar" placeholder="Cari materi..." aria-label="Cari materi (ketik kata kunci)">
         <button id="darkToggle" aria-label="Toggle dark mode">🌙</button>
       </div>
     </header>
@@ -65,21 +65,27 @@
     <!-- ABOUT PAGE -->
     <section id="aboutPage" class="page">
       <h2 class="title">Tentang Aplikasi</h2>
-      <p>Aplikasi ini berisi materi lengkap Kelas 10 SMA Semester 1 (Kurikulum Merdeka), latihan soal (5 rutin + 5 non-rutin per materi) disajikan sebagai kuis interaktif. Jawaban benar menampilkan penjelasan rinci; jawaban salah memberi tahu untuk mencoba lagi.</p>
+      <p>Aplikasi ini disusun modular: PART 1 = UI & kerangka. PART 2–5 nanti berisi materi dan soal (kamu minta materi no.1–9).</p>
+
       <div style="margin-top:12px" class="card">
         <div class="icon">📷</div>
         <div>
-          <div class="title-small">Contoh tampilan (screenshot)</div>
-          <div class="subtitle">Gambar dari perangkatmu</div>
-          <img src="/mnt/data/Screenshot 2025-11-14 134101.png" alt="screenshot" style="max-width:220px;border-radius:8px;margin-top:8px;border:1px solid #e6edf3">
+          <div class="title-small">Screenshot Sample (lokal)</div>
+          <div class="subtitle">Path file lokal (akan diubah saat deploy):</div>
+          <code>/mnt/data/Screenshot 2025-11-14 134101.png</code>
+          <div style="margin-top:8px">
+            <img src="/mnt/data/Screenshot 2025-11-14 134101.png" alt="screenshot" style="max-width:220px;border-radius:8px;margin-top:8px;border:1px solid #e6edf3">
+          </div>
         </div>
       </div>
+
       <button class="back" data-target="homePage">Kembali</button>
     </section>
 
     <footer class="footer">Materi: Kelas 10 SMA Semester 1 — Kurikulum Merdeka</footer>
   </div>
 
+  <!-- core script (PART 1) -->
   <script src="script.js"></script>
 </body>
 </html>
