@@ -4,44 +4,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math Assistant - Kelas 10</title>
+    <title>Math Assistant — Kelas 10 SMA</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<header>
-    <h1>Math Assistant Kelas 10</h1>
-    <div class="top-controls">
-        <input type="text" id="searchBar" placeholder="Cari materi...">
-        <button id="darkModeBtn">Dark Mode</button>
-    </div>
-</header>
+<div class="wrap">
 
-<!-- TAB MENU -->
-<div class="tabs">
-    <button class="tab-btn active" data-tab="materi">Materi</button>
-    <button class="tab-btn" data-tab="latihan">Latihan Soal</button>
-    <button class="tab-btn" data-tab="trik">Trik Cepat</button>
-</div>
+    <header>
+        <h1>Math Assistant</h1>
+        <p class="sub">Materi • Latihan • Trik Cepat — Kelas 10 SMA</p>
+        <button id="darkToggle" class="dark-btn">🌙</button>
+    </header>
 
-<!-- TAB CONTENT -->
+    <!-- HOME PAGE -->
+    <section id="homePage" class="page active">
+        <div class="tiles">
+            <button class="tile" data-target="materiPage">📘<br>Materi</button>
+            <button class="tile" data-target="latihanPage">📝<br>Latihan</button>
+            <button class="tile" data-target="tipsPage">⚡<br>Trik Cepat</button>
+            <button class="tile" data-target="aboutPage">ℹ️<br>Tentang</button>
+        </div>
+    </section>
 
-<!-- MATERI -->
-<div id="materi" class="tab-content active">
-    <div class="materi-list" id="materiList"></div>
-    <div class="materi-detail" id="materiDetail"></div>
-</div>
+    <!-- MATERI PAGE -->
+    <section id="materiPage" class="page">
+        <h2 class="title">Materi — Kelas 10 Semester 1</h2>
+        <div id="materiContainer"></div>
+        <button class="back" data-target="homePage">Kembali</button>
+    </section>
 
-<!-- LATIHAN SOAL -->
-<div id="latihan" class="tab-content">
-    <div class="materi-list" id="latihanList"></div>
-    <div class="materi-detail" id="latihanDetail"></div>
-</div>
+    <!-- EACH MATERI DETAIL -->
+    <section id="materiDetail" class="page">
+        <h2 id="materiTitle" class="title"></h2>
+        <div id="materiContent"></div>
+        <button class="back" data-target="materiPage">Kembali</button>
+    </section>
 
-<!-- TRIK CEPAT -->
-<div id="trik" class="tab-content">
-    <div class="trik-container" id="trikContainer"></div>
+    <!-- LATIHAN -->
+    <section id="latihanPage" class="page">
+        <h2 class="title">Latihan Soal</h2>
+        <div id="latihanContainer"></div>
+        <button class="back" data-target="homePage">Kembali</button>
+    </section>
+
+    <!-- LATIHAN DETAIL -->
+    <section id="latihanDetail" class="page">
+        <h2 id="latihanTitle" class="title"></h2>
+        <ul id="latihanList"></ul>
+        <button class="back" data-target="latihanPage">Kembali</button>
+    </section>
+
+    <!-- TIPS CEPAT -->
+    <section id="tipsPage" class="page">
+        <h2 class="title">Trik Cepat — Kelas 10</h2>
+        <div id="tipsContainer"></div>
+        <button class="back" data-target="homePage">Kembali</button>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="aboutPage" class="page">
+        <h2 class="title">Tentang Aplikasi</h2>
+        <p>Aplikasi ini membantu siswa mempelajari materi, latihan, dan trik cepat
+           berdasarkan kurikulum merdeka kelas 10 SMA.</p>
+        <button class="back" data-target="homePage">Kembali</button>
+    </section>
+
 </div>
 
 <script src="script.js"></script>

@@ -1,126 +1,145 @@
-// PAGE SWITCHER
+
+/* PAGE SWITCH */
 document.querySelectorAll("[data-target]").forEach(btn => {
     btn.addEventListener("click", () => {
         const target = btn.dataset.target;
-        document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-        document.getElementById(target).classList.add("active");
-        window.scrollTo(0, 0);
+        showPage(target);
     });
 });
 
-/* ============================
-   1. RUMUS — Kelas 10 Sem 1
-============================= */
+function showPage(id) {
+    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+    window.scrollTo(0, 0);
+}
 
-const rumus = [
-    {
-        title: "Eksponen",
-        body: `a^m × a^n = a^(m+n)
-a^m ÷ a^n = a^(m−n)
-(a^m)^n = a^(m×n)
-(ab)^n = a^n b^n
-a^(−n) = 1 / a^n`
-    },
-    {
-        title: "Logaritma",
-        body: `log_a b = c  ⇔  a^c = b
-log(xy) = log x + log y
-log(x/y) = log x − log y
-log(x^k) = k log x`
-    },
-    {
-        title: "Persamaan Linear",
-        body: `y = mx + c
-m = (y2 − y1)/(x2 − x1)`
-    },
-    {
-        title: "Fungsi Kuadrat",
-        body: `y = ax² + bx + c
-Diskriminan: D = b² − 4ac`
-    },
-    {
-        title: "Trigonometri Dasar",
-        body: `sin = depan / miring
-cos = samping / miring
-tan = depan / samping`
-    },
-    {
-        title: "Bangun Datar",
-        body: `Persegi: L = s²
-Persegi Panjang: L = p×l
-Lingkaran: L = πr²`
-    },
-];
-
-const rumusContainer = document.getElementById("rumusContainer");
-
-rumus.forEach(r => {
-    const div = document.createElement("div");
-    div.className = "block";
-    div.innerHTML = `<strong>${r.title}</strong><pre>${r.body}</pre>`;
-    rumusContainer.appendChild(div);
+/* =====================
+   DARK MODE
+===================== */
+document.getElementById("darkToggle").addEventListener("click", () => {
+    document.body.classList.toggle("dark");
 });
 
+/* =====================
+   1. MATERI
+===================== */
 
-/* ============================
+const materiList = [
+    {name:"Eksponen", icon:"🧮", id:"eksponen",
+     content:`▶ Pengertian\nBilangan berpangkat adalah…\n\n▶ Rumus\n a^m × a^n = a^(m+n)\n a^m / a^n = a^(m-n)\n …\n\n▶ Sifat\n 1. …\n 2. …\n 3. …`
+    },
+    {name:"Logaritma", icon:"📊", id:"logaritma",
+     content:`▶ Pengertian\nLogaritma adalah…\n\n▶ Rumus\n log_a b = c ↔ a^c = b\n …\n\n▶ Sifat\n1.…\n2.…`
+    },
+    {name:"Bentuk Akar", icon:"📐", id:"akar",
+     content:`▶ Pengertian\nAkar adalah…\n\n▶ Rumus\n√a × √b = √(ab)\n…`
+    },
+    {name:"Persamaan Linear", icon:"📏", id:"linear",
+     content:`▶ Rumus\n y = mx + c\n m = (y2 − y1)/(x2 − x1)`
+    },
+    {name:"Pertidaksamaan Linear", icon:"➗", id:"ptdl",
+     content:`▶ Aturan\nJika dikali bilangan negatif → arah tanda berubah`
+    },
+    {name:"Fungsi", icon:"🔤", id:"fungsi",
+     content:`▶ Pengertian\nFungsi memetakan x → y`
+    },
+    {name:"Fungsi Kuadrat", icon:"🟦", id:"kuadrat",
+     content:`▶ Rumus\n y = ax² + bx + c\n D = b² − 4ac`
+    },
+    {name:"Trigonometri Dasar", icon:"📐", id:"trigo",
+     content:`sin = depan / miring\ncos = samping / miring\ntan = depan / samping`
+    }
+];
+
+const materiContainer = document.getElementById("materiContainer");
+
+materiList.forEach(mat => {
+    const card = document.createElement("div");
+    card.className = "block";
+    card.style.cursor = "pointer";
+    card.innerHTML = `<strong>${mat.icon} ${mat.name}</strong>`;
+    card.onclick = () => openMateri(mat);
+    materiContainer.appendChild(card);
+});
+
+function openMateri(mat) {
+    document.getElementById("materiTitle").innerText = mat.icon+" "+mat.name;
+    document.getElementById("materiContent").innerHTML =
+        `<pre>${mat.content}</pre>`;
+    showPage("materiDetail");
+}
+
+/* =====================
    2. LATIHAN SOAL
-============================= */
+===================== */
 
-const latihan = [
-    {
-        q: "Hitung 2^3 × 2^4",
-        a: `Langkah 1: Basis sama → tambahkan pangkat
-Langkah 2: 3 + 4 = 7
-Langkah 3: 2^7 = 128`
-    },
-    {
-        q: "Selesaikan: log₂ 8",
-        a: `Langkah 1: log₂ 8 = c → 2^c = 8
-Langkah 2: 2^3 = 8
-Jadi c = 3`
-    },
-    {
-        q: "Gradien garis melalui (2,5) dan (6,13)",
-        a: `m = (13−5) / (6−2)
-m = 8/4 = 2`
-    },
+const latihanCategories = [
+    {name:"Eksponen", icon:"🧮", id:"lat_eks"},
+    {name:"Logaritma", icon:"📊", id:"lat_log"},
+    {name:"Bentuk Akar", icon:"📐", id:"lat_akar"},
 ];
 
-const latihanList = document.getElementById("latihanList");
+const latihanData = {
+    lat_eks: [
+        {q:"Hitung 2³ × 2⁴", a:"3+4 = 7 → 2⁷ = 128"},
+        {q:"Sederhanakan 4⁵ ÷ 4²", a:"5−2 =3 → 4³ = 64"},
+        // total 5 biasa + 5 non rutin
+    ]
+};
 
-latihan.forEach((item, i) => {
-    const li = document.createElement("li");
-    li.innerHTML = `
-        <strong>${item.q}</strong>
-        <button class="back" style="background:#457B9D;margin-top:10px"
-                onclick="toggleAns(${i})">Lihat Langkah</button>
-        <div id="ans-${i}" class="ans">${item.a}</div>`;
-    latihanList.appendChild(li);
+const latihanContainer = document.getElementById("latihanContainer");
+
+latihanCategories.forEach(cat=>{
+    const div=document.createElement("div");
+    div.className="block";
+    div.style.cursor="pointer";
+    div.innerHTML=`<strong>${cat.icon} ${cat.name}</strong>`;
+    div.onclick=()=>openLatihan(cat);
+    latihanContainer.appendChild(div);
 });
+
+function openLatihan(cat){
+    document.getElementById("latihanTitle").innerText =
+        `${cat.icon} ${cat.name}`;
+
+    const list=document.getElementById("latihanList");
+    list.innerHTML="";
+
+    latihanData[cat.id].forEach((item,i)=>{
+        const li = document.createElement("li");
+        li.innerHTML = `
+            <strong>${item.q}</strong>
+            <button class="back" style="margin-top:10px"
+                onclick="toggleAns(${i})">Lihat Jawaban</button>
+            <div id="ans-${i}" class="ans">${item.a}</div>
+        `;
+        list.appendChild(li);
+    });
+
+    showPage("latihanDetail");
+}
 
 function toggleAns(i) {
-    const el = document.getElementById("ans-" + i);
+    const el=document.getElementById("ans-"+i);
     el.style.display = el.style.display === "block" ? "none" : "block";
 }
-window.toggleAns = toggleAns;
 
-
-/* ============================
-   3. TIPS CEPAT
-============================= */
+/* =====================
+   3. TRIK CEPAT
+===================== */
 
 const tips = [
-    {rule: "Eksponen", txt: "Basis sama → pangkat ditambah. Contoh: 2³ × 2⁴ = 2⁷"},
-    {rule: "Logaritma", txt: "log(xy) = log x + log y (memecah perkalian)"},
-    {rule: "Kuadrat", txt: "D = b² − 4ac menentukan jumlah akar"},
-    {rule: "Trigonometri", txt: "tan = sin ÷ cos"}
+    {title:"Eksponen", txt:"Jika basis sama → pangkat tinggal dijumlah/dikurang."},
+    {title:"Logaritma", txt:"log(ab)=log a + log b → pecah perkalian jadi penjumlahan."},
+    {title:"Akar", txt:"Kalikan akar per-akar: √a × √b = √(ab)."},
+    {title:"Kuadrat", txt:"Gunakan D=b²-4ac untuk melihat banyak akar."}
 ];
 
-const tipsContainer = document.getElementById("tipsContainer");
+const tipsContainer=document.getElementById("tipsContainer");
 
-tips.forEach(t => {
-    const div = document.createElement("div");
-    div.className = "tip";
-    div.innerHTML = `<strong>${t.rule}</strong><br>${t.txt}`;
+tips.forEach(t=>{
+    const div=document.createElement("div");
+    div.className="tip";
+    div.innerHTML=`<strong>${t.title}</strong><br>${t.txt}`;
     tipsContainer.appendChild(div);
 });
