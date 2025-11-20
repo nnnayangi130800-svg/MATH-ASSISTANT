@@ -4,73 +4,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math Assistant — Kelas 10 SMA</title>
+    <title>Math Assistant</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="wrap">
+<header>
+    <h1>📘 Math Assistant</h1>
+    <button id="darkToggle">🌙</button>
+</header>
 
-    <header>
-        <h1>Math Assistant</h1>
-        <p class="sub">Materi • Latihan • Trik Cepat — Kelas 10 SMA</p>
-        <button id="darkToggle" class="dark-btn">🌙</button>
-    </header>
+<!-- TAB MENU -->
+<nav>
+    <button class="tabBtn" data-target="materiPage">📚 Materi</button>
+    <button class="tabBtn" data-target="latihanPage">📝 Latihan</button>
+    <button class="tabBtn" data-target="trikPage">⚡ Trik Cepat</button>
+    <button class="tabBtn" data-target="aboutPage">ℹ️ Tentang</button>
+</nav>
 
-    <!-- HOME PAGE -->
-    <section id="homePage" class="page active">
-        <div class="tiles">
-            <button class="tile" data-target="materiPage">📘<br>Materi</button>
-            <button class="tile" data-target="latihanPage">📝<br>Latihan</button>
-            <button class="tile" data-target="tipsPage">⚡<br>Trik Cepat</button>
-            <button class="tile" data-target="aboutPage">ℹ️<br>Tentang</button>
-        </div>
-    </section>
+<!-- ========================= -->
+<!--        HALAMAN MATERI     -->
+<!-- ========================= -->
+<section id="materiPage" class="page hidden">
 
-    <!-- MATERI PAGE -->
-    <section id="materiPage" class="page">
-        <h2 class="title">Materi — Kelas 10 Semester 1</h2>
-        <div id="materiContainer"></div>
-        <button class="back" data-target="homePage">Kembali</button>
-    </section>
+    <h2>📚 Daftar Materi Kelas 10</h2>
 
-    <!-- EACH MATERI DETAIL -->
-    <section id="materiDetail" class="page">
-        <h2 id="materiTitle" class="title"></h2>
-        <div id="materiContent"></div>
-        <button class="back" data-target="materiPage">Kembali</button>
-    </section>
+    <input type="text" id="searchMateri" placeholder="Cari materi...">
 
-    <!-- LATIHAN -->
-    <section id="latihanPage" class="page">
-        <h2 class="title">Latihan Soal</h2>
-        <div id="latihanContainer"></div>
-        <button class="back" data-target="homePage">Kembali</button>
-    </section>
+    <div id="materiList" class="cardList"></div>
 
-    <!-- LATIHAN DETAIL -->
-    <section id="latihanDetail" class="page">
-        <h2 id="latihanTitle" class="title"></h2>
-        <ul id="latihanList"></ul>
-        <button class="back" data-target="latihanPage">Kembali</button>
-    </section>
+</section>
 
-    <!-- TIPS CEPAT -->
-    <section id="tipsPage" class="page">
-        <h2 class="title">Trik Cepat — Kelas 10</h2>
-        <div id="tipsContainer"></div>
-        <button class="back" data-target="homePage">Kembali</button>
-    </section>
+<!-- ========================= -->
+<!--      HALAMAN LATIHAN      -->
+<!-- ========================= -->
+<section id="latihanPage" class="page hidden">
 
-    <!-- ABOUT -->
-    <section id="aboutPage" class="page">
-        <h2 class="title">Tentang Aplikasi</h2>
-        <p>Aplikasi ini membantu siswa mempelajari materi, latihan, dan trik cepat
-           berdasarkan kurikulum merdeka kelas 10 SMA.</p>
-        <button class="back" data-target="homePage">Kembali</button>
-    </section>
+    <h2>📝 Latihan Soal</h2>
 
-</div>
+    <div id="latihanList" class="cardList"></div>
+
+    <div id="quizArea" class="hidden">
+        <h3 id="quizTitle"></h3>
+        <p id="quizQuestion"></p>
+
+        <input type="text" id="quizAnswer" placeholder="Jawaban Kamu...">
+        <button id="submitAns">Kirim Jawaban</button>
+
+        <p id="quizFeedback"></p>
+        <button id="nextQuiz" class="hidden">Soal Berikutnya</button>
+    </div>
+
+</section>
+
+<!-- ========================= -->
+<!--        TRIK CEPAT         -->
+<!-- ========================= -->
+<section id="trikPage" class="page hidden">
+
+    <h2>⚡ Trik Cepat Matematika</h2>
+    <div id="trikList" class="cardList"></div>
+
+</section>
+
+<!-- ========================= -->
+<!--         TENTANG           -->
+<!-- ========================= -->
+<section id="aboutPage" class="page hidden">
+
+    <h2>ℹ️ Tentang Aplikasi</h2>
+    <p>Aplikasi ini dibuat untuk membantu siswa SMA mempelajari materi kelas 10 dengan cara yang lebih mudah.</p>
+
+</section>
 
 <script src="script.js"></script>
 </body>
