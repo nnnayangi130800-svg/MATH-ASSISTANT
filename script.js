@@ -63,15 +63,15 @@ function toggleDark(){
 
 /* ---------- DATA: daftar materi (id must match keys below) ---------- */
 const materiData = [
-  { id: "eksponen", nama: "Eksponen", icon: "𝑥²", keyword: "eksponen pangkat" },
+  { id: "eksponen", nama: "Eksponen", icon: "🧮", keyword: "eksponen pangkat" },
   { id: "logaritma", nama: "Logaritma", icon: "📈", keyword: "logaritma log" },
-  { id: "akar", nama: "Bentuk Akar", icon: "√a", keyword: "akar radikal" },
-  { id: "perslinear", nama: "Persamaan Linear", icon: "y=mx+c", keyword: "linear persamaan" },
-  { id: "pertlinear", nama: "Pertidaksamaan Linear", icon: "≠", keyword: "pertidaksamaan" },
-  { id: "fungsi", nama: "Fungsi", icon: "f(x)", keyword: "fungsi grafik" },
-  { id: "kuadrat", nama: "Fungsi Kuadrat", icon: "x²", keyword: "kuadrat parabola" },
-  { id: "trigonometri", nama: "Trigonometri Dasar", icon: "△", keyword: "trigonometri sin cos tan" },
-  { id: "bangundatar", nama: "Bangun Datar", icon: "⬛", keyword: "bangun datar luas keliling" }
+  { id: "akar", nama: "Bentuk Akar", icon: "🧊", keyword: "akar radikal" },
+  { id: "perslinear", nama: "Persamaan Linear", icon: "📏", keyword: "linear persamaan" },
+  { id: "pertlinear", nama: "Pertidaksamaan Linear", icon: "📐", keyword: "pertidaksamaan" },
+  { id: "fungsi", nama: "Fungsi", icon: "🔢", keyword: "fungsi grafik" },
+  { id: "kuadrat", nama: "Fungsi Kuadrat", icon: "🟩", keyword: "kuadrat parabola" },
+  { id: "trigonometri", nama: "Trigonometri Dasar", icon: "📐", keyword: "trigonometri sin cos tan" },
+  { id: "bangundatar", nama: "Bangun Datar", icon: "🔷", keyword: "bangun datar luas keliling" }
 ];
 
 /* ---------- MATERI DETAIL (lengkap) — gunakan id keys ---------- */
